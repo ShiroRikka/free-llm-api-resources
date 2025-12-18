@@ -438,6 +438,9 @@ def fetch_gemini_limits(logger):
             == "generativelanguage.googleapis.com/generate_content_free_tier_input_token_count"
         ):
             for dimension in quota.dimensions_infos:
+                if dimension.details.value == -1:
+                    # -1 means unlimited
+                    continue
                 models[dimension.dimensions.get("model")][
                     f"tokens/{quota.refresh_interval}"
                 ] = dimension.details.value
@@ -446,6 +449,9 @@ def fetch_gemini_limits(logger):
             == "generativelanguage.googleapis.com/generate_content_free_tier_requests"
         ):
             for dimension in quota.dimensions_infos:
+                if dimension.details.value == -1:
+                    # -1 means unlimited
+                    continue
                 models[dimension.dimensions.get("model")][
                     f"requests/{quota.refresh_interval}"
                 ] = dimension.details.value
@@ -723,6 +729,11 @@ def main():
 
     gemini_text_models = [
         {
+            "id": "gemini-3-flash-preview",
+            "name": "Gemini 3 Flash",
+            "limits": gemini_models.get("gemini-3-flash", {}),
+        },
+        {
             "id": "gemini-2.5-flash",
             "name": "Gemini 2.5 Flash",
             "limits": gemini_models.get("gemini-2.5-flash", {}),
@@ -822,14 +833,6 @@ def main():
             "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
         },
         {
-            "name": "Qwen 3 235B A22B Thinking",
-            "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
-        },
-        {
-            "name": "Qwen 3 Coder 480B",
-            "limits_text": "10 requests/minute<br>150,000 tokens/minute<br>100 requests/hour<br>1,000,000 tokens/hour<br>100 requests/day<br>1,000,000 tokens/day"
-        },
-        {
             "name": "Llama 3.3 70B",
             "limits_text": "30 requests/minute<br>64,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
         },
@@ -842,12 +845,8 @@ def main():
             "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
         },
         {
-            "name": "Llama 4 Scout",
-            "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
-        },
-        {
-            "name": "Llama 4 Maverick",
-            "limits_text": "30 requests/minute<br>60,000 tokens/minute<br>900 requests/hour<br>1,000,000 tokens/hour<br>14,400 requests/day<br>1,000,000 tokens/day"
+            "name": "Z.ai GLM-4.6",
+            "limits_text": "10 requests/minute<br>60,000 tokens/minute<br>100 requests/hour<br>100,000 tokens/hour<br>100 requests/day<br>1,000,000 tokens/day"
         },
     ]
     for model in cerebras_models:
@@ -872,7 +871,7 @@ def main():
     model_list_markdown += "### [Cohere](https://cohere.com)\n\n"
     model_list_markdown += "**Limits:**\n\n"
     model_list_markdown += "[20 requests/minute<br>1,000 requests/month](https://docs.cohere.com/docs/rate-limits)\n\n"
-    model_list_markdown += "Models share a common quota.\n\n"
+    model_list_markdown += "Models share a common monthly quota.\n\n"
     if cohere_models:
         for model in cohere_models:
             model_list_markdown += f"- {model['name']}\n"
