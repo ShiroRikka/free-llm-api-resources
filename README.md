@@ -73,7 +73,6 @@ Models share a common quota.
 - [qwen/qwen3-coder:free](https://openrouter.ai/qwen/qwen3-coder:free)
 - [qwen/qwen3-next-80b-a3b-instruct:free](https://openrouter.ai/qwen/qwen3-next-80b-a3b-instruct:free)
 - [stepfun/step-3.5-flash:free](https://openrouter.ai/stepfun/step-3.5-flash:free)
-- [upstage/solar-pro-3:free](https://openrouter.ai/upstage/solar-pro-3:free)
 - [z-ai/glm-4.5-air:free](https://openrouter.ai/z-ai/glm-4.5-air:free)
 
 ### [Google AI Studio](https://aistudio.google.com)
@@ -82,6 +81,7 @@ Data is used for training when used outside of the UK/CH/EEA/EU.
 
 <table><thead><tr><th>Model Name</th><th>Model Limits</th></tr></thead><tbody>
 <tr><td>Gemini 3 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
+<tr><td>Gemini 3.1 Flash-Lite</td><td>250,000 tokens/minute<br>500 requests/day<br>15 requests/minute</td></tr>
 <tr><td>Gemini 2.5 Flash</td><td>250,000 tokens/minute<br>20 requests/day<br>5 requests/minute</td></tr>
 <tr><td>Gemini 2.5 Flash-Lite</td><td>250,000 tokens/minute<br>20 requests/day<br>10 requests/minute</td></tr>
 <tr><td>Gemma 3 27B Instruct</td><td>15,000 tokens/minute<br>14,400 requests/day<br>30 requests/minute</td></tr>
@@ -178,9 +178,7 @@ Routes to various supported providers.
 Models share a common monthly quota.
 
 - c4ai-aya-expanse-32b
-- c4ai-aya-expanse-8b
 - c4ai-aya-vision-32b
-- c4ai-aya-vision-8b
 - command-a-03-2025
 - command-a-reasoning-08-2025
 - command-a-translate-08-2025
@@ -422,10 +420,8 @@ Very stringent payment verification for Google Cloud.
 - deepseek-ai/DeepSeek-R1-Distill-Llama-70B
 - deepseek-ai/DeepSeek-V3-0324
 - deepseek-ai/DeepSeek-V3.1
-- deepseek-ai/DeepSeek-V3.1
 - deepseek-ai/DeepSeek-V3.1-Terminus
 - deepseek-ai/DeepSeek-V3.2
-- minimaxai/minimax-m2.5
 - openai/gpt-oss-120b
 - tbd
 
